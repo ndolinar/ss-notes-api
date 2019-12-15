@@ -39,12 +39,6 @@ provider:
       Resource: 'arn:aws:dynamodb:us-ease-2:*:*'
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
   create:
     handler: create.main
     events:
@@ -53,6 +47,7 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
   get:
     handler: get.main
     events:
@@ -97,3 +92,7 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
